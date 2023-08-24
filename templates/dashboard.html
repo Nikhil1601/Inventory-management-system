@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Inventory Dashboard</h1>
+        <p>Welcome, {{ session['username'] }}!</p>
+
+        <form method="POST" action="/dashboard">
+            <input type="text" name="item_name" placeholder="Item Name" required><br>
+            <input type="number" name="quantity" placeholder="Quantity" required><br>
+            <input type="text" name="vendor" placeholder="Vendor" required><br>
+            <input type="number" name="cost" placeholder="Cost" required><br>
+
+            {% if session['username'] == 'admin' %}
+            <select name="owner">
+                {% for user in users %}
+                <option value="{{ user }}">{{ user }}</option>
+
+                {% endfor %}
+            </select><br>
+            <a href="/add_user">Add User</a>
+            {% else %}
+            <input type="hidden" name="owner" value="{{ session['username'] }}">
+            {% endif %}
+            
+            <button type="submit">Add Item</button>
+        </form>
+
+        <a href="/show">Show Inventory Data</a>
+        <a href="/logout">Logout</a>
+        <a href="/transfer">Transfer Items</a>
+
+        
+
+    </div>
+</body>
+</html>

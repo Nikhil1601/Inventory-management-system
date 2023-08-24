@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transfer Items</title>
+</head>
+<body>
+    <h1>Transfer Items</h1>
+
+    <form method="POST" action="/transfer">
+        <label for="item_id">Select Item:</label>
+        <select name="item_id">
+            {% for item in user_inventory %}
+                <option value="{{ item[0] }}">{{ item[1] }} (Quantity: {{ item[2] }})</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="transfer_quantity">Transfer Quantity:</label>
+        <input type="number" name="transfer_quantity" min="1" required><br>
+
+        <label for="user_to">Transfer To User:</label>
+        <select name="user_to">
+            {% for user in other_users %}
+                <option value="{{ user }}">{{ user }}</option>
+            {% endfor %}
+        </select><br>
+
+        <button type="submit">Transfer</button>
+    </form>
+
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>

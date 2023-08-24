@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New User and Items</title>
+    <!-- Add your CSS styling here if needed -->
+</head>
+<body>
+    <h1>Add New User and Initial Items</h1>
+
+    <form method="POST" action="/add_user">
+        <label for="new_username">Username:</label>
+        <input type="text" id="new_username" name="new_username" required><br>
+        <label for="new_password">Password:</label>
+        <input type="password" id="new_password" name="new_password" required><br>
+        <h3>Initial Inventory Items</h3>
+        <div id="initial_items_container">
+            <div class="initial_item">
+                <label for="initial_item_name">Item Name:</label>
+                <input type="text" name="initial_item_name[]" required><br>
+                <label for="initial_item_quantity">Quantity:</label>
+                <input type="number" name="initial_item_quantity[]" required><br>
+                <label for="initial_item_cost">Cost:</label>
+                <input type="number" name="initial_item_cost[]" required><br>
+                <label for="initial_item_vendor">Vendor:</label>
+                <input type="text" name="initial_item_vendor[]" required><br>
+                <!-- Add more fields for initial items as needed -->
+            </div>
+        </div>
+        <button type="button" onclick="addInitialItemField()">Add Item</button>
+        <button type="submit">Add User and Items</button>
+    </form>
+
+    <a href="/dashboard">Go Back to Dashboard</a>
+
+    <script>
+        function addInitialItemField() {
+            var container = document.getElementById("initial_items_container");
+            var newItemDiv = document.createElement("div");
+            newItemDiv.className = "initial_item";
+            newItemDiv.innerHTML = `
+                <label for="initial_item_name">Item Name:</label>
+                <input type="text" name="initial_item_name[]" required><br>
+                <label for="initial_item_quantity">Quantity:</label>
+                <input type="number" name="initial_item_quantity[]" required><br>
+                <label for="initial_item_cost">Cost:</label>
+                <input type="number" name="initial_item_cost[]" required><br>
+                <label for="initial_item_vendor">Vendor:</label>
+                <input type="text" name="initial_item_vendor[]" required><br>
+                <!-- Add more fields for initial items as needed -->
+            `;
+            container.appendChild(newItemDiv);
+        }
+    </script>
+</body>
+</html>
